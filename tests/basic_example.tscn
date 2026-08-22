@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ceyi84m2tj8xc"]
+
+[ext_resource type="Script" uid="uid://docfmry4dcteg" path="res://tests/basic_example.gd" id="1_jgrmq"]
+[ext_resource type="Script" uid="uid://cdmpbh1maxlp4" path="res://addons/gm_core/core/game_master.gd" id="2_0mx2j"]
+[ext_resource type="Script" uid="uid://cg2gud8uwuhql" path="res://addons/gm_core/core/entity_container.gd" id="3_8o5id"]
+
+[sub_resource type="Resource" id="Resource_b5ix1"]
+script = ExtResource("3_8o5id")
+
+[node name="BasicExample" type="Node" unique_id=494543589]
+script = ExtResource("1_jgrmq")
+
+[node name="GameMaster" type="Node" parent="." unique_id=1368609360]
+script = ExtResource("2_0mx2j")
+entities = SubResource("Resource_b5ix1")
+metadata/_custom_type_script = "uid://cdmpbh1maxlp4"
