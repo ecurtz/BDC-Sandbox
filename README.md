@@ -7,7 +7,7 @@ It attempts to merge modern software design patterns with classic pen-and-paper 
 ## Features
 
 - **Tabletop Metaphor:** Rules and action resolution are handled by a central `GameMaster` router.
-- **Action Handling:** Each `RpgAction` is a self contained rule that can be executed by the `GameMaster`. Intercept and modify `RpgAction` data synchronously via signals before execution.
+- **Action Handling:** Each `RpgAction` is a self-contained rule that can be executed by the `GameMaster`. Intercept and modify `RpgAction` data synchronously via signals before execution.
 - **Systems Oriented:** `signal`s are used extensively to provide hooks for your own custom systems and managers. You can extend the optional `RpgSystem` nodes to skip basic signal boilerplate too.
 - **Data-Driven:** Entities, worlds, and stats are represented with extensible and composable  `RpgComponent` resources.
 
