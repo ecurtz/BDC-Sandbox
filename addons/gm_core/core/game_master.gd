@@ -1,3 +1,4 @@
+@icon("res://addons/gm_core/icon_gm_small.svg")
 class_name GameMaster
 extends Node
 ## The Game Master orchestrates the game world, entity management, and action resolution.
