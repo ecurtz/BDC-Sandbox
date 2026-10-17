@@ -1,5 +1,11 @@
 # MIT License
 
+BDC-Sandbox Additions:
+
+Copyright (c) 2026 Eli Curtz
+
+Original Game-Master-Core Files:
+
 Copyright (c) 2026 Luca Carbone
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
