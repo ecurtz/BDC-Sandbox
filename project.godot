@@ -13,12 +13,12 @@ config_version=5
 config/name="GM Core"
 config/tags=PackedStringArray("plugin")
 run/main_scene="uid://ceyi84m2tj8xc"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gm_core/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/bdc_combat/plugin.cfg", "res://addons/gm_core/plugin.cfg")
 
 [physics]
 

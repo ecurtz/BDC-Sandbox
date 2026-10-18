@@ -1,16 +1,21 @@
 [gd_scene format=3 uid="uid://ceyi84m2tj8xc"]
 
-[ext_resource type="Script" uid="uid://docfmry4dcteg" path="res://tests/basic_example.gd" id="1_jgrmq"]
+[ext_resource type="Script" uid="uid://blc6lf4uiwg31" path="res://tests/basic_example.gd" id="1_j8400"]
 [ext_resource type="Script" uid="uid://cdmpbh1maxlp4" path="res://addons/gm_core/core/game_master.gd" id="2_0mx2j"]
 [ext_resource type="Script" uid="uid://cg2gud8uwuhql" path="res://addons/gm_core/core/entity_container.gd" id="3_8o5id"]
+[ext_resource type="Script" uid="uid://pmamyx0bfg80" path="res://addons/bdc_combat/combat_system.gd" id="3_470h5"]
 
 [sub_resource type="Resource" id="Resource_b5ix1"]
 script = ExtResource("3_8o5id")
 
 [node name="BasicExample" type="Node" unique_id=494543589]
-script = ExtResource("1_jgrmq")
+script = ExtResource("1_j8400")
 
 [node name="GameMaster" type="Node" parent="." unique_id=1368609360]
 script = ExtResource("2_0mx2j")
 entities = SubResource("Resource_b5ix1")
 metadata/_custom_type_script = "uid://cdmpbh1maxlp4"
+
+[node name="CombatSystem" type="Node" parent="GameMaster" unique_id=259179404]
+script = ExtResource("3_470h5")
+metadata/_custom_type_script = "uid://pmamyx0bfg80"
