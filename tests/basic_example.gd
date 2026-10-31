@@ -1,5 +1,8 @@
 extends Node
 
+@export var fighter_a:Fighter
+@export var fighter_b:Fighter
+
 @onready var gm: GameMaster = $GameMaster
 
 func _ready() -> void:
@@ -10,10 +13,18 @@ func _ready() -> void:
 	# Spawn the combat system and a couple of fighters
 	var combat = find_child("CombatSystem")
 	
-	var fighter_a = Fighter.new()
-	fighter_a.resource_name = "Mercenary A"
-	var fighter_b = Fighter.new()
-	fighter_b.resource_name = "Mercenary B"
+	if (fighter_a):
+		fighter_a = fighter_a.duplicate(true)
+	else:
+		fighter_a = Fighter.new()
+		fighter_a.resource_name = "Fighter"
+	fighter_a.resource_name += " A"
+	if (fighter_b):
+		fighter_b = fighter_b.duplicate(true)
+	else:
+		fighter_b = Fighter.new()
+		fighter_b.resource_name = "Fighter"
+	fighter_b.resource_name += " B"
 	var id_a = gm.entities.add_entity([fighter_a])
 	var id_b = gm.entities.add_entity([fighter_b])
 	

@@ -72,6 +72,10 @@ func _on_action_preview(action: RpgAction) -> void:
 		var hit = action as Weapon.HitAction
 		print(hit.roll.attacker)
 		print(hit)
+	if (action is Weapon.ParryAction):
+		var parry = action as Weapon.ParryAction
+		print(parry.roll.attacker)
+		print(parry)
 
 func _on_action_resolved(outcome: Outcome) -> void:
 	if (outcome is Weapon.HitOutcome):
@@ -83,9 +87,13 @@ func _on_action_resolved(outcome: Outcome) -> void:
 		#else:
 			#print("Weapon Fail")
 			#
-	#if (outcome is Weapon.ParryOutcome):
-		#if (outcome.is_success()):
-			#print("Weapon Parried")
+	if (outcome is Weapon.ParryOutcome):
+		if (outcome.is_success()):
+			var action = (outcome as Weapon.ParryOutcome).source
+			var parry = action as Weapon.ParryAction
+			var defender = parry.roll.defender as Fighter
+			var parried = parry.against as Weapon.Roll
+			defender.rolls.erase(parried)
 		#else:
 			#print("Parry Fail")
 			#

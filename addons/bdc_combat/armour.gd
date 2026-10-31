@@ -2,8 +2,8 @@ class_name Armour
 extends RpgComponent
 
 @export var cost:int = 0
-@export var value:int = 0
-var modifier:int = 0
+@export var value:int = 6
+var save:ModifiableStat
 
 static var clothing: Armour
 static func _static_init() -> void:
@@ -11,6 +11,17 @@ static func _static_init() -> void:
 	clothing.resource_name = "Basic Clothing"
 	clothing.value = 6
 
+func _init() -> void:
+	save = ModifiableStat.new(value, 8, 2)
+
+func save_chance(against:Weapon.Roll) -> float:
+	var rend = absi(against.weapon.rend)
+	var target = save.value + rend
+	if (target > 6):
+		return 0
+	else:
+		return (6 - target + 1) / 6
+		
 class SaveAction extends RpgAction:
 	var armour: Armour
 	var against: Weapon.Roll
@@ -26,7 +37,7 @@ class SaveAction extends RpgAction:
 		
 		# Accept positive or negative rend values
 		var rend = absi(against.weapon.rend)
-		if ((roll + armour.modifier - rend) < armour.value):
+		if ((roll - rend) < armour.save.value):
 			roll = FAILED
 		
 		var outcome = SaveOutcome.new(self, roll)
@@ -44,4 +55,4 @@ class SaveOutcome extends Outcome:
 		if is_failure():
 			return "%s failed" % [source]
 		
-		return "%s succeded with roll %d" % [source, result]
+		return "%s succeeded with roll %d" % [source, result]

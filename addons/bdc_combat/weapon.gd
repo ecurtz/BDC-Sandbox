@@ -32,8 +32,8 @@ class Roll:
 	func can_hit() -> bool:
 		return weapon.is_hit.call(self)
 	
-	func can_parry() -> bool:
-		return weapon.is_parry.call(self)
+	func can_parry(vs:Roll) -> bool:
+		return weapon.is_parry.call(self, vs)
 	
 	func calculate_damage() -> int:
 		var damage = ""
@@ -112,9 +112,9 @@ class HitAction extends RpgAction:
 		
 	func _to_string():
 		if (roll.weapon.resource_name):
-			return "Hit for " + roll.weapon.resource_name
+			return "Hit with %s (%d)" % [roll.weapon.resource_name, roll.value]
 		else:
-			return "Hit"
+			return "Hit (%d)" % [roll.value]
 
 class HitOutcome extends Outcome:
 	func get_message() -> String:
@@ -128,19 +128,33 @@ class HitOutcome extends Outcome:
 			if (result == HitAction.ARMOUR_SAVE):
 				return "%s was blocked by armour" % [hit.roll.weapon]
 		
-		return "%s hit with %s for %d damage" % [hit.roll.defender, hit.roll.weapon, result]
+		return "%s hit by %s for %d damage" % [hit.roll.defender, hit.roll.weapon, result]
 
 class ParryAction extends RpgAction:
 	var roll: Roll
 	var against: Roll
+	var parry: int
 	
+	const FAILED:int = -1
+
 	func _init(roll:Roll, against:Roll) -> void:
 		self.roll = roll
 		self.against = against
 	
 	func attempt(gm: GameMaster) -> bool:
-		#resolved.emit(ParryOutcome.new(self, damage))
+		parry = DicePool.roll(1, 6)
+		if (parry  < 2):
+			parry = FAILED
+		
+		var outcome = ParryOutcome.new(self, parry)
+		resolved.emit(outcome)
 		return true
+	
+	func _to_string():
+		if (roll.weapon.resource_name):
+			return "Parried with %s (%d)" % [roll.weapon.resource_name, roll.value]
+		else:
+			return "Parry (%d)" % [roll.value]
 
 class ParryOutcome extends Outcome:
 	func get_message() -> String:
@@ -162,5 +176,5 @@ func generic_is_hit(roll:Roll) -> bool:
 	return false
 
 var is_parry: Callable = generic_is_parry
-func generic_is_parry(roll:Roll) -> bool:
+func generic_is_parry(roll:Roll, vs:Roll) -> bool:
 	return false

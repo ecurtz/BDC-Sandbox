@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MeleeWeapon" format=3 uid="uid://vhbqfv4w5qm7"]
+
+[ext_resource type="Script" uid="uid://cltff52rek3f6" path="res://addons/bdc_combat/melee_weapon.gd" id="1_f7uv5"]
+
+[resource]
+resource_name = "Sword"
+script = ExtResource("1_f7uv5")
+traits = 72
+cost = 18
+attacks = 3
+damage = "1"
+critical_damage = "d3"
+metadata/_custom_type_script = "uid://cltff52rek3f6"

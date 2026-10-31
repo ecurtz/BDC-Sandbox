@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blc6lf4uiwg31" path="res://tests/basic_example.gd" id="1_j8400"]
 [ext_resource type="Script" uid="uid://cdmpbh1maxlp4" path="res://addons/gm_core/core/game_master.gd" id="2_0mx2j"]
+[ext_resource type="Resource" uid="uid://tmay0h2p64r" path="res://tests/fighters/guild_mercenary.tres" id="2_krruh"]
 [ext_resource type="Script" uid="uid://cg2gud8uwuhql" path="res://addons/gm_core/core/entity_container.gd" id="3_8o5id"]
 [ext_resource type="Script" uid="uid://pmamyx0bfg80" path="res://addons/bdc_combat/combat_system.gd" id="3_470h5"]
 
@@ -10,6 +11,7 @@ script = ExtResource("3_8o5id")
 
 [node name="BasicExample" type="Node" unique_id=494543589]
 script = ExtResource("1_j8400")
+fighter_a = ExtResource("2_krruh")
 
 [node name="GameMaster" type="Node" parent="." unique_id=1368609360]
 script = ExtResource("2_0mx2j")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GuildFighter" format=3 uid="uid://tmay0h2p64r"]
+
+[ext_resource type="Script" uid="uid://cunf4tlj0hidu" path="res://addons/bdc_combat/guild_fighter.gd" id="1_0l4hy"]
+[ext_resource type="Resource" uid="uid://vhbqfv4w5qm7" path="res://tests/weapons/sword.tres" id="1_gbhsq"]
+
+[resource]
+resource_name = "Guild Mercenary"
+script = ExtResource("1_0l4hy")
+cost = 50
+experience = 20
+life = 4
+melee_weapon_1 = ExtResource("1_gbhsq")
+metadata/_custom_type_script = "uid://dya3rsyj8rwmj"

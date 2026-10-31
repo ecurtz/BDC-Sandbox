@@ -64,10 +64,17 @@ func melee_is_hit(roll:Weapon.Roll) -> bool:
 	
 	return false
 
-func melee_is_parry(roll:Weapon.Roll, versus:MeleeWeapon) -> bool:
+func melee_is_parry(roll:Weapon.Roll, vs:Weapon.Roll) -> bool:
 	if (has_trait(TRAITS.WRAP)):
 		return false
-	if (versus.has_trait(TRAITS.WRAP)):
+	if (vs.weapon.has_trait(TRAITS.WRAP)):
+		return false
+	if (has_trait(TRAITS.NATURAL)):
+		return false
+	
+	if (self.is_crit.call(roll)):
+		return true
+	if (vs.weapon.is_crit.call(vs)):
 		return false
 	
 	if (self.is_hit.call(roll)):
@@ -84,7 +91,7 @@ func roll_dice(attacker:Fighter, offhand:bool = false) -> Array[int]:
 	if (offhand):
 		if (has_trait(TRAITS.OFF_HAND)):
 			pool.add(1, 6)
-			if (attacker.has_skill(Fighter.SKILLS.DUAL_WIELDER)):
+			if (attacker.has_skill(Fighter.VETERAN_SKILLS.DUAL_WIELDER)):
 				pool.add(1, 6)
 	else:
 		for i in attacks:

@@ -23,27 +23,21 @@ var health:RpgStat
 
 @export var logic:FighterLogic
 
-enum SKILLS {
-	BLOODIED = (1 << 0),
-	CHARGING = (1 << 1),
-	GUARDED = (1 << 2),
-	POISONED = (1 << 3),
-	HEAVY = (1 << 4),
-	NATURAL = (1 << 5),
-	OFF_HAND = (1 << 6),
-	ONE_USE = (1 << 7),
-	POISON = (1 << 8),
-	RARE = (1 << 9),
-	SCARE = (1 << 10),
-	TWO_HANDED = (1 << 11),
-	UNWIELDY = (1 << 12),
-	DUAL_WIELDER = (1 << 13)
+enum VETERAN_SKILLS {
+	DUAL_WIELDER = (1 << 0),
+	SHOOTING_DRILLS = (1 << 1),
+	GREAT_WEAPONS = (1 << 2),
+	UNSHAKEABLE = (1 << 3),
+	TOUGH_BASTARD = (1 << 4),
+	FAST_LEARNER = (1 << 5),
+	DUELLIST = (1 << 6),
+	STEADY_AIM = (1 << 7)
 	}
-@export_flags ("Arcane", "Bludgeon", "Brace", "Guard", "Heavy",
-	"Natural", "Off-hand", "One-use", "Poison", "Rare", "Scare",
-	"Two-handed", "Unwieldy", "Wrap") var skills:int
+@export_flags ("Dual Wielder", "Shooting Drills",
+	"Great Weapons", "Unshakeable", "Tough Bastard",
+	"Fast Learner", "Duellist", "Steady Aim") var skills:int
 
-func has_skill(test:SKILLS) -> bool:
+func has_skill(test:int) -> bool:
 	return (skills & test)
 	
 enum FLAGS {
@@ -65,11 +59,14 @@ func clear_flag(to_clear:FLAGS) -> void:
 
 var engagements:Array[Fighter] = []
 
+var rolls:Array[Weapon.Roll] = []
+	
+
 func _init() -> void:
 	health = RpgStat.new(life, 20, 0)
 	
 	if (!logic):
-		logic = FighterLogic.Beast.new()
+		logic = FighterLogic.Soldier.new()
 		
 	if (!melee_weapon_1):
 		melee_weapon_1 = MeleeWeapon.unarmed_strike.duplicate(true)
@@ -96,7 +93,7 @@ func roll_initiative(opponent: Fighter) -> int:
 	return initiative + DicePool.roll(1, 6)
 
 func roll_melee(opponent: Fighter) -> Array[Weapon.Roll]:
-	var rolls:Array[Weapon.Roll] = []
+	rolls.clear()
 	
 	if (melee_weapon_1):
 		var dice:Array[int] = melee_weapon_1.roll_dice(self)
@@ -116,7 +113,7 @@ func choose_melee_action(rolls:Array[Weapon.Roll], vs:Array[Weapon.Roll]) -> Rpg
 	return logic.choose_melee_roll(rolls, vs)
 	
 func roll_ranged(opponent: Fighter) -> Array[Weapon.Roll]:
-	var rolls:Array[Weapon.Roll] = []
+	rolls.clear()
 	
 	if (ranged_weapon):
 		var dice:Array[int] = ranged_weapon.roll_dice(self)
